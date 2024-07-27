@@ -1,7 +1,7 @@
-const Feedback = () => {
+import styles from "./Feedback.module.css"
+
+export const Feedback = () => {
   return (
-    <div>Feedback</div>
+    <div className={styles.card}>Feedback</div>
   )
 }
-
-export default Feedback

@@ -1,21 +1,37 @@
-// import { useState, useEffect } from "react";
-import './App.css'
+import { useState } from "react";
+
+import { Description } from './components/Description/Description';
 import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
 
-function App() {
+import './App.css'
+
+const App = () => {
+  const [reviews, setReviews] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0
+  });
+  const updateFeedback = (feedbackType) => {
+    setReviews((prevState) => ({
+      ...prevState, [feedbackType]: feedbackType + 1,
+    }))
+  }
+  
+
   return (
+    <div>
     <>
-      <div>
-        <h1>Sip Happens Café </h1>
-        <p>Please leave your feedback about our service by selecting one of the options below.
-</p>
+      <Description />
+        <Options feedbackFunction={updateFeedback} />
+        <Feedback
+          good={reviews.good}
+          neutral={reviews.neutral}
+          bad={reviews.bad}
+        />
+      </>
       </div>
-       <Options />
-      <Feedback />
-     
-         </>
-  )
-}
+  );
+};
 
 export default App
