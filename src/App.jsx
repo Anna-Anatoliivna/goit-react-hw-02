@@ -5,6 +5,7 @@ import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
 
 import './App.css'
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [reviews, setReviews] = useState({
@@ -27,14 +28,20 @@ const App = () => {
     <div>
     <>
       <Description />
-        <Options updateFeedback={updateFeedback} />
-        <Feedback
+        <Options updateFeedback={updateFeedback}
+          totalFeedback={totalFeedback}
+        />
+        {totalFeedback !== 0 ? 
+          <Feedback
           good={reviews.good}
           neutral={reviews.neutral}
           bad={reviews.bad}
           total={totalFeedback}
           positiveFeedback={positiveFeedback}
-          />
+        />
+         : 
+          <Notification/>      
+                }
       </>
       </div>
   );
