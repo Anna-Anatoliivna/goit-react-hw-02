@@ -12,23 +12,29 @@ const App = () => {
     neutral: 0,
     bad: 0
   });
-  const updateFeedback = (feedbackType) => {
-    setReviews((prevState) => ({
-      ...prevState, [feedbackType]: feedbackType + 1,
-    }))
-  }
-  
 
+  const updateFeedback = (feedbackType) => {
+    console.log('click', feedbackType);
+    setReviews({ ...reviews, [feedbackType]: reviews[feedbackType] + 1,
+    })
+      }
+  const totalFeedback = reviews.good + reviews.neutral + reviews.bad;
+  const positiveFeedback = Math.round((reviews.good / totalFeedback) * 100);
+
+
+ 
   return (
     <div>
     <>
       <Description />
-        <Options feedbackFunction={updateFeedback} />
+        <Options updateFeedback={updateFeedback} />
         <Feedback
           good={reviews.good}
           neutral={reviews.neutral}
           bad={reviews.bad}
-        />
+          total={totalFeedback}
+          positiveFeedback={positiveFeedback}
+          />
       </>
       </div>
   );
